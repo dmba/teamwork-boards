@@ -18,7 +18,8 @@ import me.dmba.teamworkboards.data.model.source.TaskRepoImpl
 @Module(
     includes = [
         DataModuleBindings::class,
-        ApiModule::class
+        ApiModule::class,
+        DatabaseModule::class
     ]
 )
 object DataModule
