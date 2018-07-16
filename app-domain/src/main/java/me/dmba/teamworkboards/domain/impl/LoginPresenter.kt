@@ -2,7 +2,7 @@ package me.dmba.teamworkboards.domain.impl
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import me.dmba.teamworkboards.common.utils.addTo
+import me.dmba.teamworkboards.common.extensions.addTo
 import me.dmba.teamworkboards.data.model.access.AuthRepo
 import me.dmba.teamworkboards.domain.base.DisposablePresenter
 import me.dmba.teamworkboards.domain.contract.LoginContract
