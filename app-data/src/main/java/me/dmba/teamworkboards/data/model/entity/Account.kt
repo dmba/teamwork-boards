@@ -5,6 +5,8 @@ package me.dmba.teamworkboards.data.model.entity
  */
 data class Account(
 
-    val id: String
+    val id: String,
+
+    val user: String
 
 )

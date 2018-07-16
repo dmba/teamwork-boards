@@ -17,32 +17,32 @@ import me.dmba.teamworkboards.data.model.source.local.dao.TaskDao
         DatabaseModuleBindings::class
     ]
 )
-object DatabaseModule {
+internal object DatabaseModule {
 
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideDataBase(): TeamWorkDatabase = TODO()
+    fun provideDataBase(): TeamWorkDatabase = TODO()
 
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideAccountDao(db: TeamWorkDatabase): AccountDao = db.accountDao()
+    fun provideAccountDao(db: TeamWorkDatabase): AccountDao = db.accountDao()
 
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideActivityDao(db: TeamWorkDatabase): ActivityDao = db.activityDao()
+    fun provideActivityDao(db: TeamWorkDatabase): ActivityDao = db.activityDao()
 
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideProjectDao(db: TeamWorkDatabase): ProjectDao = db.projectDao()
+    fun provideProjectDao(db: TeamWorkDatabase): ProjectDao = db.projectDao()
 
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideTaskDao(db: TeamWorkDatabase): TaskDao = db.taskDao()
+    fun provideTaskDao(db: TeamWorkDatabase): TaskDao = db.taskDao()
 
 }
 

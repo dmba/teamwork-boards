@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string translatable="false" name="app_login_redirect_url">
+        teamworkboards://login
+    </string>
+
+    <string translatable="false" name="app_teamwork_url">
+        https://www.teamwork.com
+    </string>
+
+    <string translatable="false" name="app_teamwork_login_url">
+        %1$s/launchpad/login?redirect_uri=%2$s
+    </string>
+
+</resources>

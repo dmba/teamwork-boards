@@ -10,14 +10,8 @@ import dagger.Reusable
 import me.dmba.teamworkboards.data.keyvalue.KeyValue
 import me.dmba.teamworkboards.data.keyvalue.SessionKeyValue
 import me.dmba.teamworkboards.data.keyvalue.SharedPrefsKeyValue
-import me.dmba.teamworkboards.data.model.access.AccountRepo
-import me.dmba.teamworkboards.data.model.access.ActivityRepo
-import me.dmba.teamworkboards.data.model.access.ProjectRepo
-import me.dmba.teamworkboards.data.model.access.TaskRepo
-import me.dmba.teamworkboards.data.model.source.AccountRepoImpl
-import me.dmba.teamworkboards.data.model.source.ActivityRepoImpl
-import me.dmba.teamworkboards.data.model.source.ProjectRepoImpl
-import me.dmba.teamworkboards.data.model.source.TaskRepoImpl
+import me.dmba.teamworkboards.data.model.access.*
+import me.dmba.teamworkboards.data.model.source.*
 import javax.inject.Singleton
 
 /**
@@ -69,5 +63,9 @@ internal interface DataModuleBindings {
     @Binds
     @Reusable
     fun bindTaskRepo(repo: TaskRepoImpl): TaskRepo
+
+    @Binds
+    @Reusable
+    fun bindAuthRepo(repo: AuthRepoImpl): AuthRepo
 
 }
