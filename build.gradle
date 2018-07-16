@@ -1,0 +1,36 @@
+allprojects {
+    evaluationDependsOn ':configs'
+
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+buildscript {
+    evaluationDependsOn ':configs'
+
+    repositories {
+        google()
+        jcenter()
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        // Android gradle plugin
+        classpath gradlePlugins.android
+
+        // Kotlin android gradle plugin
+        classpath gradlePlugins.kotlin
+
+        // Check latest version of dependencies, task: dependencyUpdates
+        classpath gradlePlugins.gradleVersions
+
+        // Analyse builds to profile
+        classpath gradlePlugins.buildScan
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
