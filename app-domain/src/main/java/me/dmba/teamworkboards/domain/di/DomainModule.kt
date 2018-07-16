@@ -2,7 +2,9 @@ package me.dmba.teamworkboards.domain.di
 
 import dagger.Binds
 import dagger.Module
+import me.dmba.teamworkboards.domain.contract.BoardsContract
 import me.dmba.teamworkboards.domain.contract.LoginContract
+import me.dmba.teamworkboards.domain.impl.BoardsPresenter
 import me.dmba.teamworkboards.domain.impl.LoginPresenter
 
 /**
@@ -20,5 +22,8 @@ internal interface DomainModuleBindings {
 
     @Binds
     fun bindsLoginPresenter(presenter: LoginPresenter): LoginContract.Presenter
+
+    @Binds
+    fun bindsBoardsPresenter(presenter: BoardsPresenter): BoardsContract.Presenter
 
 }
