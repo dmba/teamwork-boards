@@ -28,6 +28,8 @@ android {
 }
 
 dependencies {
+    api project(':app-domain')
+
     implementation libraries.kotlin
     implementation libraries.support
     implementation libraries.anko
