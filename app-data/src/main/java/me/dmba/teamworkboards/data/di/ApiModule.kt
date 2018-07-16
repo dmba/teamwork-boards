@@ -1,12 +1,12 @@
 package me.dmba.teamworkboards.data.di
 
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
-import me.dmba.teamworkboards.data.model.source.remote.api.AccountService
-import me.dmba.teamworkboards.data.model.source.remote.api.ActivityService
-import me.dmba.teamworkboards.data.model.source.remote.api.ProjectService
-import me.dmba.teamworkboards.data.model.source.remote.api.TaskService
+import me.dmba.teamworkboards.data.model.source.remote.api.*
+import me.dmba.teamworkboards.data.model.source.remote.provider.TeamworkUrlProvider
+import me.dmba.teamworkboards.data.model.source.remote.provider.TeamworkUrlProviderImpl
 import retrofit2.Retrofit
 
 /**
@@ -17,34 +17,52 @@ import retrofit2.Retrofit
         ApiModuleBindings::class
     ]
 )
-object ApiModule {
+internal object ApiModule {
 
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideRetrofit(): Retrofit = TODO()
+    fun provideRetrofit(urlProvider: TeamworkUrlProvider): Retrofit = Retrofit.Builder()
+        .baseUrl(urlProvider.apiUrl)
+        .build()
 
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideAccountService(retrofit: Retrofit): AccountService = retrofit.create(AccountService::class.java)
+    fun provideAuthService(urlProvider: TeamworkUrlProvider): AuthenticationService {
+        return Retrofit.Builder()
+            .baseUrl(urlProvider.apiUrl)
+            .build()
+            .create(AuthenticationService::class.java)
+    }
 
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideActivityService(retrofit: Retrofit): ActivityService = retrofit.create(ActivityService::class.java)
+    fun provideAccountService(retrofit: Retrofit): AccountService = retrofit.create(AccountService::class.java)
 
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideProjectService(retrofit: Retrofit): ProjectService = retrofit.create(ProjectService::class.java)
+    fun provideActivityService(retrofit: Retrofit): ActivityService = retrofit.create(ActivityService::class.java)
 
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideTaskService(retrofit: Retrofit): TaskService = retrofit.create(TaskService::class.java)
+    fun provideProjectService(retrofit: Retrofit): ProjectService = retrofit.create(ProjectService::class.java)
+
+    @Provides
+    @Reusable
+    @JvmStatic
+    fun provideTaskService(retrofit: Retrofit): TaskService = retrofit.create(TaskService::class.java)
 
 }
 
 @Module
-internal interface ApiModuleBindings
+internal interface ApiModuleBindings {
+
+    @Binds
+    @Reusable
+    fun bindTeamworkUrls(teamworkUrlProvider: TeamworkUrlProviderImpl): TeamworkUrlProvider
+
+}
