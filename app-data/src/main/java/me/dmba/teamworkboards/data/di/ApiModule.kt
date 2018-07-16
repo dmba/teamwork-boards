@@ -5,8 +5,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import me.dmba.teamworkboards.data.model.source.remote.api.*
+import me.dmba.teamworkboards.data.model.source.remote.interceptors.TeamWorkEndpointInterceptor
+import me.dmba.teamworkboards.data.model.source.remote.interceptors.TeamworkApiTokenInterceptor
 import me.dmba.teamworkboards.data.model.source.remote.provider.TeamworkUrlProvider
 import me.dmba.teamworkboards.data.model.source.remote.provider.TeamworkUrlProviderImpl
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
 /**
@@ -22,8 +25,18 @@ internal object ApiModule {
     @Provides
     @Reusable
     @JvmStatic
-    fun provideRetrofit(urlProvider: TeamworkUrlProvider): Retrofit = Retrofit.Builder()
+    fun provideOkHttpClient(endpointInterceptor: TeamWorkEndpointInterceptor,
+                            apiTokenInterceptor: TeamworkApiTokenInterceptor): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(endpointInterceptor)
+        .addInterceptor(apiTokenInterceptor)
+        .build()
+
+    @Provides
+    @Reusable
+    @JvmStatic
+    fun provideRetrofit(urlProvider: TeamworkUrlProvider, client: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(urlProvider.apiUrl)
+        .client(client)
         .build()
 
     @Provides
