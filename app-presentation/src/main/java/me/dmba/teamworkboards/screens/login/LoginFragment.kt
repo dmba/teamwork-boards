@@ -10,11 +10,9 @@ import me.dmba.teamworkboards.screens.base.BaseFragment
 class LoginFragment : BaseFragment<LoginContract.Presenter>(R.layout.fragment_login), LoginContract.View {
 
     override fun showLoginError() {
-        TODO("not implemented")
     }
 
     override fun loadLoginPage(loginUrl: String) {
-        TODO("not implemented")
     }
 
 }

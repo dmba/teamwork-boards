@@ -4,7 +4,10 @@ import dagger.Binds
 import dagger.Module
 import me.dmba.teamworkboards.di.utils.ForActivity
 import me.dmba.teamworkboards.di.utils.ForFragment
+import me.dmba.teamworkboards.domain.contract.BoardsContract
 import me.dmba.teamworkboards.domain.contract.LoginContract
+import me.dmba.teamworkboards.screens.boards.BoardsFragment
+import me.dmba.teamworkboards.screens.boards.BoardsNavigator
 import me.dmba.teamworkboards.screens.login.LoginFragment
 import me.dmba.teamworkboards.screens.login.LoginNavigator
 
@@ -28,5 +31,13 @@ interface MvpModuleBindings {
     @Binds
     @ForActivity
     fun bindsLoginNavigator(navigator: LoginNavigator): LoginContract.Navigator
+
+    @Binds
+    @ForFragment
+    fun bindsBoardsView(fragment: BoardsFragment): BoardsContract.View
+
+    @Binds
+    @ForActivity
+    fun bindsBoardsNavigator(navigator: BoardsNavigator): BoardsContract.Navigator
 
 }
