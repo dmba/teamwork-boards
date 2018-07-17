@@ -8,7 +8,7 @@ import me.dmba.teamworkboards.di.DaggerAppComponent
 /**
  * Created by dmba on 7/17/18.
  */
-class App : DaggerApplication() {
+class App : BaseDaggerApp() {
 
     private val component: AppComponent by lazy {
         DaggerAppComponent.builder()

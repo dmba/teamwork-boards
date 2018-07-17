@@ -37,6 +37,8 @@ dependencies {
     implementation libraries.dagger
     implementation libraries.rxjava
 
+    debugImplementation devLibraries.stetho
+
     testImplementation testLibraries.junit
     testImplementation testLibraries.assertj
     testImplementation testLibraries.mockito
