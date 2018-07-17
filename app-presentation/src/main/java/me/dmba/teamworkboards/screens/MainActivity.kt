@@ -1,9 +1,10 @@
-package me.dmba.teamworkboards
+package me.dmba.teamworkboards.screens
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import dagger.android.support.DaggerAppCompatActivity
+import me.dmba.teamworkboards.R
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
