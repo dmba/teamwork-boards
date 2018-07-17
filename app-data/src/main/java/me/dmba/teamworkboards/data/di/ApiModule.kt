@@ -11,6 +11,8 @@ import me.dmba.teamworkboards.data.model.source.remote.provider.TeamworkUrlProvi
 import me.dmba.teamworkboards.data.model.source.remote.provider.TeamworkUrlProviderImpl
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Created by dmba on 7/16/18.
@@ -37,6 +39,8 @@ internal object ApiModule {
     fun provideRetrofit(urlProvider: TeamworkUrlProvider, client: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(urlProvider.apiUrl)
         .client(client)
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     @Provides
@@ -45,6 +49,8 @@ internal object ApiModule {
     fun provideAuthService(urlProvider: TeamworkUrlProvider): AuthenticationService {
         return Retrofit.Builder()
             .baseUrl(urlProvider.apiUrl)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AuthenticationService::class.java)
     }
