@@ -1,5 +1,7 @@
 package me.dmba.teamworkboards.webkit
 
+import android.net.Uri
+import android.net.Uri.parse
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -20,8 +22,10 @@ class TeamworkLoginWebViewClient @Inject constructor(
 
     val onReceiveLoginCode: Subject<String> = BehaviorSubject.create()
 
+    val loginRedirectUri: Uri by lazy { parse(authRepo.loginRedirectUrl) }
+
     override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
-        return if (request.url.authority == authRepo.loginRedirectUrl) {
+        return if (request.url.scheme == loginRedirectUri.scheme) {
             onReceiveLoginCode.onNext(request.url.getQueryParameter(KEY_CODE))
             true
         } else {

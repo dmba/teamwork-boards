@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TW Boards</string>
+    <string name="app_something_went_wrong">Something went wrong</string>
+    <string name="app_hello_user">Hello, %1$s!</string>
 </resources>
