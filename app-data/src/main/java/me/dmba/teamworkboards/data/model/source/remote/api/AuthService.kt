@@ -9,7 +9,7 @@ import retrofit2.http.POST
 /**
  * Created by dmba on 7/16/18.
  */
-interface AuthenticationService {
+interface AuthService {
 
     @POST("/launchpad/v1/token.json")
     fun authenticate(@Body payload: TokenRequest): Single<TokenResponse>

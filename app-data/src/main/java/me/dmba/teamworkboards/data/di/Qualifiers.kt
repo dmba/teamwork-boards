@@ -15,3 +15,13 @@ annotation class KeyValueSession
 @MustBeDocumented
 @Retention(AnnotationRetention.RUNTIME)
 annotation class KeyValuePrefs
+
+@Qualifier
+@MustBeDocumented
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Auth
+
+@Qualifier
+@MustBeDocumented
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Api

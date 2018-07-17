@@ -5,21 +5,17 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import me.dmba.teamworkboards.data.model.source.remote.api.*
-import me.dmba.teamworkboards.data.model.source.remote.interceptors.TeamWorkEndpointInterceptor
-import me.dmba.teamworkboards.data.model.source.remote.interceptors.TeamworkApiTokenInterceptor
 import me.dmba.teamworkboards.data.model.source.remote.provider.TeamworkUrlProvider
 import me.dmba.teamworkboards.data.model.source.remote.provider.TeamworkUrlProviderImpl
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Created by dmba on 7/16/18.
  */
 @Module(
     includes = [
-        ApiModuleBindings::class
+        ApiModuleBindings::class,
+        RetrofitModule::class
     ]
 )
 internal object ApiModule {
@@ -27,53 +23,27 @@ internal object ApiModule {
     @Provides
     @Reusable
     @JvmStatic
-    fun provideOkHttpClient(endpointInterceptor: TeamWorkEndpointInterceptor,
-                            apiTokenInterceptor: TeamworkApiTokenInterceptor): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(endpointInterceptor)
-        .addInterceptor(apiTokenInterceptor)
-        .build()
+    fun provideAuthService(@Auth retrofit: Retrofit): AuthService = retrofit.create(AuthService::class.java)
 
     @Provides
     @Reusable
     @JvmStatic
-    fun provideRetrofit(urlProvider: TeamworkUrlProvider, client: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl(urlProvider.apiUrl)
-        .client(client)
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+    fun provideAccountService(@Api retrofit: Retrofit): AccountService = retrofit.create(AccountService::class.java)
 
     @Provides
     @Reusable
     @JvmStatic
-    fun provideAuthService(urlProvider: TeamworkUrlProvider): AuthenticationService {
-        return Retrofit.Builder()
-            .baseUrl(urlProvider.apiUrl)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(AuthenticationService::class.java)
-    }
+    fun provideActivityService(@Api retrofit: Retrofit): ActivityService = retrofit.create(ActivityService::class.java)
 
     @Provides
     @Reusable
     @JvmStatic
-    fun provideAccountService(retrofit: Retrofit): AccountService = retrofit.create(AccountService::class.java)
+    fun provideProjectService(@Api retrofit: Retrofit): ProjectService = retrofit.create(ProjectService::class.java)
 
     @Provides
     @Reusable
     @JvmStatic
-    fun provideActivityService(retrofit: Retrofit): ActivityService = retrofit.create(ActivityService::class.java)
-
-    @Provides
-    @Reusable
-    @JvmStatic
-    fun provideProjectService(retrofit: Retrofit): ProjectService = retrofit.create(ProjectService::class.java)
-
-    @Provides
-    @Reusable
-    @JvmStatic
-    fun provideTaskService(retrofit: Retrofit): TaskService = retrofit.create(TaskService::class.java)
+    fun provideTaskService(@Api retrofit: Retrofit): TaskService = retrofit.create(TaskService::class.java)
 
 }
 

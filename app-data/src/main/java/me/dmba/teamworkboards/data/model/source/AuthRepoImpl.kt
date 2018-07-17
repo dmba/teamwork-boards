@@ -5,7 +5,7 @@ import me.dmba.teamworkboards.common.utils.EMPTY
 import me.dmba.teamworkboards.data.di.KeyValuePrefs
 import me.dmba.teamworkboards.data.keyvalue.KeyValue
 import me.dmba.teamworkboards.data.model.access.AuthRepo
-import me.dmba.teamworkboards.data.model.source.remote.api.AuthenticationService
+import me.dmba.teamworkboards.data.model.source.remote.api.AuthService
 import me.dmba.teamworkboards.data.model.source.remote.model.TokenRequest
 import me.dmba.teamworkboards.data.model.source.remote.model.TokenResponse
 import me.dmba.teamworkboards.data.model.source.remote.provider.TeamworkUrlProvider
@@ -21,7 +21,7 @@ internal class AuthRepoImpl @Inject constructor(
 
     urlProvider: TeamworkUrlProvider,
 
-    private val authenticationService: AuthenticationService,
+    private val authService: AuthService,
 
     @KeyValuePrefs private val keyValue: KeyValue
 
@@ -40,7 +40,7 @@ internal class AuthRepoImpl @Inject constructor(
     override var apiEndpoint: String by KeyValueDelegate(keyValue, API_ENDPOINT)
 
     override fun authenticate(code: String): Completable {
-        return authenticationService.authenticate(TokenRequest(code))
+        return authService.authenticate(TokenRequest(code))
             .doOnSuccess { this.handleSuccess(it) }
             .doOnError { this.handleError(it) }
             .toCompletable()

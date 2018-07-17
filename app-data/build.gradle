@@ -26,7 +26,7 @@ dependencies {
 
     api libraries.retrofit
 
-    implementation devLibraries.stetho
+    debugImplementation devLibraries.stetho
 
     testImplementation testLibraries.junit
     testImplementation testLibraries.assertj
