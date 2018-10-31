@@ -65,27 +65,29 @@ versions += [
     anko            : '0.10.5',
     support         : '26.1.0',
     constraintLayout: '1.1.0',
+    dragListView    : '1.6.2',
     dagger          : '2.16',
+    assistedInject  : '0.3.0',
     rxjava          : '2.0.2',
     gson            : '2.7',
     okhttp          : '3.2.0',
     retrofit        : '2.4.0',
     picasso         : '2.5.2',
     picassoOkttp    : '1.0.2',
-    arch            : '1.1.0'
+    arch            : '1.1.0',
 ]
 
 libraries += [
-    kotlin   : [
+    kotlin      : [
         "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
     ],
 
-    anko     : [
+    anko        : [
         "org.jetbrains.anko:anko-commons:$versions.anko",
         "org.jetbrains.anko:anko-coroutines:$versions.anko"
     ],
 
-    support  : [
+    support     : [
         "com.android.support:support-annotations:$versions.support",
         "com.android.support:appcompat-v7:$versions.support",
         "com.android.support:recyclerview-v7:$versions.support",
@@ -94,55 +96,61 @@ libraries += [
         "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
     ],
 
-    dagger   : [
+    dagger      : [
         "com.google.dagger:dagger:$versions.dagger",
-        "com.google.dagger:dagger-android-support:$versions.dagger"
+        "com.google.dagger:dagger-android-support:$versions.dagger",
+        "com.squareup.inject:assisted-inject-annotations-dagger2:$versions.assistedInject"
     ],
 
-    daggerApt: [
+    daggerApt   : [
+        "com.squareup.inject:assisted-inject-processor-dagger2:$versions.assistedInject",
         "com.google.dagger:dagger-compiler:$versions.dagger",
         "com.google.dagger:dagger-android-processor:$versions.dagger"
     ],
 
-    rxjava   : [
+    dragListView: [
+        "com.github.woxthebox:draglistview:$versions.dragListView"
+    ],
+
+    rxjava      : [
         "io.reactivex.rxjava2:rxandroid:$versions.rxjava",
         "io.reactivex.rxjava2:rxjava:$versions.rxjava"
     ],
 
-    gson     : "com.google.code.gson:gson:$versions.gson",
+    gson        : "com.google.code.gson:gson:$versions.gson",
 
-    okHttp   : [
+    okHttp      : [
         "com.squareup.okhttp3:okhttp:$versions.okhttp",
         "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
     ],
 
-    retrofit : [
+    retrofit    : [
         "com.squareup.retrofit2:retrofit:$versions.retrofit",
         "com.squareup.retrofit2:converter-gson:$versions.retrofit",
         "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
     ],
 
-    picasso  : [
+    picasso     : [
         "com.squareup.picasso:picasso:$versions.picasso",
         "com.jakewharton.picasso:picasso2-okhttp3-downloader:$versions.picassoOkttp"
     ],
 
-    fresko   : [
+    fresko      : [
     ],
 
-    glide    : [
+    glide       : [
     ],
 
-    room     : [
+    room        : [
         "android.arch.persistence.room:runtime:$versions.arch",
         "android.arch.persistence.room:rxjava2:$versions.arch"
     ],
 
-    roomApt  : [
+    roomApt     : [
         "android.arch.persistence.room:compiler:$versions.arch",
     ],
 
-    paging   : [
+    paging      : [
         "android.arch.paging:runtime:$versions.arch"
     ]
 ]

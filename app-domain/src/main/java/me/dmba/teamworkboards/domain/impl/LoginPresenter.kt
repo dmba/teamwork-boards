@@ -21,7 +21,7 @@ internal class LoginPresenter @Inject constructor(
 
 ) : DisposablePresenter(), LoginContract.Presenter {
 
-    override fun onViewCreated() {
+    override fun onStart() {
         if (authRepo.hasApiToken) {
             navigator.goToBoards()
         } else {

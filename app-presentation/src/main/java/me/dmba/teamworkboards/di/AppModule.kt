@@ -2,8 +2,11 @@ package me.dmba.teamworkboards.di
 
 import android.app.Application
 import android.content.Context
+import com.squareup.picasso.Picasso
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
+import dagger.Reusable
 import me.dmba.teamworkboards.App
 import me.dmba.teamworkboards.di.utils.ForApplication
 
@@ -15,7 +18,14 @@ import me.dmba.teamworkboards.di.utils.ForApplication
         AppBindingsModule::class
     ]
 )
-object AppModule
+object AppModule {
+
+    @Provides
+    @JvmStatic
+    @Reusable
+    fun providePicasso(context: Context): Picasso = Picasso.with(context)
+
+}
 
 @Module
 interface AppBindingsModule {

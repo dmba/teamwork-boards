@@ -3,8 +3,10 @@ package me.dmba.teamworkboards.domain.impl
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.dmba.teamworkboards.common.extensions.addTo
-import me.dmba.teamworkboards.data.model.access.AccountRepo
-import me.dmba.teamworkboards.data.model.entity.Account
+import me.dmba.teamworkboards.data.model.access.ProjectRepo
+import me.dmba.teamworkboards.data.model.entity.Card
+import me.dmba.teamworkboards.data.model.entity.Column
+import me.dmba.teamworkboards.data.model.entity.Project
 import me.dmba.teamworkboards.domain.base.DisposablePresenter
 import me.dmba.teamworkboards.domain.contract.BoardsContract
 import javax.inject.Inject
@@ -18,20 +20,40 @@ internal class BoardsPresenter @Inject constructor(
 
     private val navigator: BoardsContract.Navigator,
 
-    private val accountRepo: AccountRepo
+    private val projectRepo: ProjectRepo
 
 ) : DisposablePresenter(), BoardsContract.Presenter {
 
-    override fun onViewCreated() {
-        accountRepo.getAccountDetails()
+    override fun onStart() {
+        projectRepo.getProject()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::onSuccess, ::onError)
+            .subscribe(::onNextProject, ::onError)
             .addTo(disposables)
     }
 
-    private fun onSuccess(account: Account) {
-        view.showGreetingTo(account.user)
+    override fun onRefreshColumnCards(column: Column) {
+        projectRepo.getCardsForColumn(column.id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(onNextFetchColumnCards(column), ::onError)
+            .addTo(disposables)
+    }
+
+    override fun onCardClick(card: Card) {
+        navigator.goToCardDetails(card)
+    }
+
+    private fun onNextProject(project: Project) {
+        projectRepo.getColumns(project.id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(view::showColumns, ::onError)
+            .addTo(disposables)
+    }
+
+    private fun onNextFetchColumnCards(column: Column): (List<Card>) -> Unit = { cards ->
+        view.updateCardsForColumn(column, cards)
     }
 
     private fun onError(throwable: Throwable) {

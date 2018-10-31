@@ -38,7 +38,7 @@ class TestLoginPresenter : RxFixture() {
         doReturn(loginUrl).on(authRepo).loginUrl
 
         // When
-        presenter.onViewCreated()
+        presenter.onStart()
 
         // Then
         verify(view).loadLoginPage(loginUrl)
@@ -50,7 +50,7 @@ class TestLoginPresenter : RxFixture() {
         doReturn(true).on(authRepo).hasApiToken
 
         // When
-        presenter.onViewCreated()
+        presenter.onStart()
 
         // Then
         verify(navigator).goToBoards()

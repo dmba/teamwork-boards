@@ -17,7 +17,11 @@ interface FragmentBuilderModule {
     fun contributeLoginFragment(): LoginFragment
 
     @ForFragment
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(
+        modules = [
+            FragmentBoardsModule::class
+        ]
+    )
     fun contributeBoardsFragment(): BoardsFragment
 
 }

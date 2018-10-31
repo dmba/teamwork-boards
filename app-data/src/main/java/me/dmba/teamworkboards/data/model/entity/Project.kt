@@ -5,6 +5,8 @@ package me.dmba.teamworkboards.data.model.entity
  */
 data class Project(
 
-    val id: String
+    val id: String,
+
+    val name: String
 
 )

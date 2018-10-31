@@ -10,11 +10,11 @@ internal abstract class DisposablePresenter : BaseContract.Presenter {
 
     protected val disposables = CompositeDisposable()
 
-    override fun onViewCreated() {
+    override fun onStart() {
     }
 
     @CallSuper
-    override fun onViewDestroyed() {
+    override fun onStop() {
         disposables.dispose()
     }
 

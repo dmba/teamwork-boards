@@ -17,9 +17,9 @@ class BaseContract {
     @AnyThread
     interface Presenter {
 
-        fun onViewCreated()
+        fun onStart()
 
-        fun onViewDestroyed()
+        fun onStop()
 
     }
 

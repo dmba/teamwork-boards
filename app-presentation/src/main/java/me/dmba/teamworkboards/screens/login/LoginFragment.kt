@@ -2,7 +2,6 @@ package me.dmba.teamworkboards.screens.login
 
 import android.os.Bundle
 import android.view.View
-import android.webkit.WebView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_login.*
 import me.dmba.teamworkboards.R
@@ -21,10 +20,8 @@ class LoginFragment : BaseFragment<LoginContract.Presenter>(R.layout.fragment_lo
     lateinit var loginWebViewClient: TeamworkLoginWebViewClient
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-
-        setupWebView(webView)
-
         super.onViewCreated(view, savedInstanceState)
+        setupWebView()
     }
 
     override fun loadLoginPage(loginUrl: String) {
@@ -35,7 +32,7 @@ class LoginFragment : BaseFragment<LoginContract.Presenter>(R.layout.fragment_lo
         Toast.makeText(context, R.string.app_something_went_wrong, Toast.LENGTH_LONG).show()
     }
 
-    private fun setupWebView(webView: WebView) = webView.apply {
+    private fun setupWebView() = webView.apply {
         webViewClient = loginWebViewClient.apply {
             onReceiveLoginCode
                 .subscribe(presenter::onReceiveLoginCode)

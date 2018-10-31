@@ -3,6 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+androidExtensions {
+    experimental = true
+}
+
+kapt {
+    correctErrorTypes = true
+}
+
 android {
     compileSdkVersion versions.targetSdk
     buildToolsVersion versions.buildTools
@@ -36,6 +44,11 @@ dependencies {
     implementation libraries.anko
     implementation libraries.dagger
     implementation libraries.rxjava
+    implementation libraries.picasso
+
+    implementation(libraries.dragListView, {
+        exclude group: 'com.android.support'
+    })
 
     debugImplementation devLibraries.stetho
 

@@ -25,21 +25,27 @@ abstract class BaseFragment<P : BaseContract.Presenter> constructor(
 
     protected val disposables = CompositeDisposable()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(layoutId, container, false)
     }
 
     @CallSuper
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        presenter.onViewCreated()
+    override fun onStart() {
+        super.onStart()
+        presenter.onStart()
     }
 
     @CallSuper
-    override fun onDestroyView() {
-        presenter.onViewDestroyed()
+    override fun onStop() {
+        presenter.onStop()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         disposables.dispose()
-        super.onDestroyView()
     }
 
 }
